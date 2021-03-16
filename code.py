@@ -4,7 +4,7 @@ import code_analysis as CA
 
 #read file
 try:
-    file = open(sys.argv[1],'r')
+    file = open(sys.argv[1],'r',encoding="utf8")
     line_number = 0
 
     for line in file:
