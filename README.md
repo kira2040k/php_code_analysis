@@ -3,4 +3,5 @@
     python code.py <any php file here>
     or
     python code.py => and this will scan all files in your folder
+    or
     python code.py <folder path> => will scan files in folder
