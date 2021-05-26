@@ -1,6 +1,7 @@
 from os import listdir
 import code_analysis as CA
 from sys import argv
+import os
 def scan_files_in_folder(path):
     
     
@@ -19,7 +20,7 @@ def scan_files_in_folder(path):
             CA.search.check_file_upload(file)
             
     for i in folders:
-        if ("." not in i):
+        if os.path.isdir(f"{path}/{i}"):
             scan_files_in_folder(f"{path}/{i}")
     return folders
     
