@@ -24,7 +24,7 @@ def scan_files_in_folder(path):
             pass
     for i in folders:
         try:
-            if ("." not in i and os.path.isdir(f"{path}/{i}")):
+            if (os.path.isdir(f"{path}/{i}")):
                 scan_files_in_folder(f"{path}/{i}")
         except:
             pass
