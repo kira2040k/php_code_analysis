@@ -2,6 +2,17 @@ from os import listdir
 import code_analysis as CA
 from sys import argv
 import os
+import colors
+print(f"""
+{colors.color.purple('[+]------------------------------------------[+]')}
+
+twitter:kira_321k
+insta:at9w
+
+[+]-----------------------------------[+]
+
+""")
+colors.color.reset()
 def scan_files_in_folder(path):
     
     
