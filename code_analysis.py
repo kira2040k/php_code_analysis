@@ -139,7 +139,7 @@ class info():
         print(colors.color.blue(f"total number of vulnerabilities: {number_vuln}"))
         print(colors.color.blue(check.number_of_vuln("SQLi",SQli_number_vuln)))
         print(colors.color.blue(check.number_of_vuln("XSS",XSS_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("command injection",command_injection_number_vuln)))
+        print(colors.color.blue(check.number_of_vuln("execute functions",command_injection_number_vuln)))
         print(colors.color.blue(check.number_of_vuln("LFI",LFI_number_vuln)))
         print(colors.color.blue(check.number_of_vuln("SSRF",SSRF_number_vuln)))
         print(colors.color.blue(check.number_of_vuln("uplaod issues",check_file_upload_number_vuln)))
