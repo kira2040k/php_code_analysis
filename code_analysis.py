@@ -14,8 +14,11 @@ check_file_upload_number_vuln = 0
 ID_number_vuln = 0
 
 
-
-
+def count_vuln(vuln):
+    if vuln == 0:
+        return "0"
+    else: 
+        return vuln
 
 class search():
     def command_injection(line,line_number):
@@ -136,16 +139,16 @@ class info():
     def finish():
         global  number_vuln , start_time , SQli_number_vuln , XSS_number_vuln , command_injection_number_vuln, LFI_number_vuln, SSRF_number_vuln, check_file_upload_number_vuln , host_header_injection_number_vuln , open_redirect_number_vuln , ID_number_vuln
         print(colors.color.blue("-"*50))
-        print(colors.color.blue(f"total number of vulnerabilities: {number_vuln}"))
-        print(colors.color.blue(check.number_of_vuln("SQLi",SQli_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("XSS",XSS_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("execute functions",command_injection_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("LFI",LFI_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("SSRF",SSRF_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("uplaod issues",check_file_upload_number_vuln)))
-        print(colors.color.blue(check.number_of_vuln("host_header_injection",host_header_injection_number_vuln)))
+        print(colors.color.blue(f"total number of vulnerabilities: {count_vuln(number_vuln)}"))
+        print(colors.color.blue(check.number_of_vuln("SQLi",count_vuln(SQli_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("XSS",count_vuln(XSS_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("execute functions",count_vuln(command_injection_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("LFI",count_vuln(LFI_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("SSRF",count_vuln(SSRF_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("uplaod issues",count_vuln(check_file_upload_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("host_header_injection",count_vuln(host_header_injection_number_vuln))))
         
-        print(colors.color.blue(check.number_of_vuln("insecure deserialization",ID_number_vuln)))
+        print(colors.color.blue(check.number_of_vuln("insecure deserialization",count_vuln(ID_number_vuln))))
         print(colors.color.blue(f"execute time: {time() - start_time}/s"))
         colors.color.reset()
 class check():
