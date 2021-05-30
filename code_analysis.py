@@ -14,11 +14,7 @@ check_file_upload_number_vuln = 0
 ID_number_vuln = 0
 
 
-def count_vuln(vuln):
-    if vuln == 0:
-        return "0"
-    else: 
-        return vuln
+
 
 class search():
     def command_injection(line,line_number):
@@ -32,7 +28,7 @@ class search():
             command_injection_number_vuln+=1
     def LFI(line,line_number):
         global number_vuln,LFI_number_vuln 
-        regex = "include \$_.*|include_once \$_.*|require \$_.*|require_once \$_.*|readfile \$_.*"
+        regex = "include \$_.*|include_once \$_.*|require \$_.*|require_once \$_.*|readfile \$_.*|include\(.*\$.*\)"
         black_list = findall(regex, line)
         if(black_list):
             print(colors.color.red(f'found LFI on line {line_number+1}'))   
@@ -41,7 +37,7 @@ class search():
             LFI_number_vuln+=1
     def XSS(line,line_number):
         global number_vuln,XSS_number_vuln
-        regex = "echo \$.*|echo \$_[A-Z]{2,6}\[.*\]|echo \$\_SERVER\[\'PHP\_SELF\'\]|echo \$\_SERVER\[\'SCRIPT\_NAME\'\]|echo \$\_SERVER\[\'HTTP\_USER\_AGENT\'\]|echo \$\_SERVER\[\'HTTP\_REFERER\'\]"
+        regex = "echo \$.*|echo \$_[A-Z]{2,6}\[.*\]|echo \$\_SERVER\[\'PHP\_SELF\'\]|echo \$\_SERVER\[\'SCRIPT\_NAME\'\]|echo \$\_SERVER\[\'HTTP\_USER\_AGENT\'\]|echo \$\_SERVER\[\'HTTP\_REFERER\'\]|echo(.*\$_[A-Z]{2,6}\[.*\])|echo .*\$"
         black_list = findall(regex, line)
         if(black_list):
             print(colors.color.red(f'found XSS on line {line_number+1}'))   
@@ -77,7 +73,7 @@ class search():
             ID_number_vuln+=1
     def SQLi(file):
         global number_vuln,SQli_number_vuln
-        regex = "query\(.*\)|mysql_query\(.*\)|get_results\(.*\)|get_var\(.*\)"
+        regex = "query\(.*\)|mysql_query\(.*\)|get_results\(.*\)|get_var\(.*\)|mysqli_query\(.*\)"
         black_list = findall(regex, file)
         regex2 = "\'\$.*\'|\"\$.*\""
         if(black_list):
@@ -139,16 +135,15 @@ class info():
     def finish():
         global  number_vuln , start_time , SQli_number_vuln , XSS_number_vuln , command_injection_number_vuln, LFI_number_vuln, SSRF_number_vuln, check_file_upload_number_vuln , host_header_injection_number_vuln , open_redirect_number_vuln , ID_number_vuln
         print(colors.color.blue("-"*50))
-        print(colors.color.blue(f"total number of vulnerabilities: {count_vuln(number_vuln)}"))
-        print(colors.color.blue(check.number_of_vuln("SQLi",count_vuln(SQli_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("XSS",count_vuln(XSS_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("execute functions",count_vuln(command_injection_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("LFI",count_vuln(LFI_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("SSRF",count_vuln(SSRF_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("uplaod issues",count_vuln(check_file_upload_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("host_header_injection",count_vuln(host_header_injection_number_vuln))))
+        print(colors.color.blue(f"total number of vulnerabilities: {number_vuln}"))
+        print(colors.color.blue(check.number_of_vuln("XSS",check.count_vuln(XSS_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("execute functions",check.count_vuln(command_injection_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("LFI",check.count_vuln(LFI_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("SSRF",check.count_vuln(SSRF_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("uplaod issues",check.count_vuln(check_file_upload_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("host_header_injection",check.count_vuln(host_header_injection_number_vuln))))
         
-        print(colors.color.blue(check.number_of_vuln("insecure deserialization",count_vuln(ID_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("insecure deserialization",check.count_vuln(ID_number_vuln))))
         print(colors.color.blue(f"execute time: {time() - start_time}/s"))
         colors.color.reset()
 class check():
@@ -169,3 +164,8 @@ class check():
             return f"{name} vulnerability :{number}"
         else:
             False
+    def count_vuln(vuln):
+        if vuln == 0:
+            return "0"
+        else: 
+            return vuln
