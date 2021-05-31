@@ -140,7 +140,7 @@ class info():
         print(colors.color.blue(check.number_of_vuln("execute functions",check.count_vuln(command_injection_number_vuln))))
         print(colors.color.blue(check.number_of_vuln("LFI",check.count_vuln(LFI_number_vuln))))
         print(colors.color.blue(check.number_of_vuln("SSRF",check.count_vuln(SSRF_number_vuln))))
-        print(colors.color.blue(check.number_of_vuln("uplaod issues",check.count_vuln(check_file_upload_number_vuln))))
+        print(colors.color.blue(check.number_of_vuln("upload issues",check.count_vuln(check_file_upload_number_vuln))))
         print(colors.color.blue(check.number_of_vuln("host_header_injection",check.count_vuln(host_header_injection_number_vuln))))
         
         print(colors.color.blue(check.number_of_vuln("insecure deserialization",check.count_vuln(ID_number_vuln))))
