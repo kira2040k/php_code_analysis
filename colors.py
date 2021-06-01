@@ -31,3 +31,6 @@ class color:
     def black(text):
         color = (f"\u001b[30;1m{text}")
         return color
+    def orange(text):
+        color = (f"\033[33m{text}")
+        return color
