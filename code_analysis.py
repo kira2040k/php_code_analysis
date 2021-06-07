@@ -43,9 +43,8 @@ class search():
             colors.color.reset()
             number_vuln+=1
             LFI_number_vuln+=1
-    def XSS(file,line,line_number):
+    def XSS(line,line_number):
         global number_vuln,XSS_number_vuln
-        file = file.read()
         
         regex = "echo \$.*|echo \$_[A-Z]{2,6}\[.*\]|echo \$\_SERVER\[\'PHP\_SELF\'\]|echo \$\_SERVER\[\'SCRIPT\_NAME\'\]|echo \$\_SERVER\[\'HTTP\_USER\_AGENT\'\]|echo \$\_SERVER\[\'HTTP\_REFERER\'\]|echo \(\$_[A-Z]{2,6}\[.*\]\)|echo \(.*\$\)"
         black_list = findall(regex, line)
@@ -205,7 +204,7 @@ class check():
         for line in file:            
             search.command_injection(line.strip('\n'),line_number)
             search.LFI(line.strip('\n'),line_number)
-            search.XSS(file,line.strip('\n'),line_number)
+            search.XSS(line.strip('\n'),line_number)
             search.SSRF(line.strip('\n'),line_number)
             search.open_redirect(line.strip('\n'),line_number)
             search.ID(line.strip('\n'),line_number)
