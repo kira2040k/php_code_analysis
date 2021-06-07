@@ -7,6 +7,7 @@ from os import listdir
 import os
 import requests
 import sys
+
 start_time = time()
 number_vuln = 0
 XSS_number_vuln = 0
@@ -19,6 +20,7 @@ host_header_injection_number_vuln = 0
 check_file_upload_number_vuln = 0
 ID_number_vuln = 0
 found_XSS_open_server = []
+
 
 
 
@@ -88,7 +90,7 @@ class search():
                 
                 if(black_list2):
                     for vuln2 in black_list2:
-                        print(colors.color.yellow(f"found SQLi: {vuln}"))
+                        print(colors.color.yellow(f"found SQLi: {vuln}")) #find SQli but not sure 
                         number_vuln+=1
                         SQli_number_vuln+=1
                         
@@ -133,7 +135,7 @@ class info():
             for vuln in black_list:
 
                     param = vuln[7:-2]
-                    param = sub(r'\'.*|\$|\".*|\].*|\[.*|&&.*|=>|,.*|\|\|.*', '', param)
+                    param = sub(r'\'.*|\$|\".*|\].*|\[.*|&&.*|=>|,.*|\|\|.*', '', param) 
                     
                     if(param not in parameters and len(param) != 0 ):    
                         parameters.append(param)
@@ -233,12 +235,16 @@ class server():
                 file = file.read()
                 
                 payloads = ['x"><img src=adsad onerror=alert(123)//>//','<svg/onload=alert(1)',"<ScRiPt>alert(1)</sCriPt>"]
+                
                 GET_parameters = server.GET_parameters(file)
+                
                 for par in GET_parameters:
                     par = par.replace('\'','').replace("\"","").replace("[","").replace("]","") 
                     for payload in payloads:
-                        attack_url = path.replace(original_path,"")
-                        url = f"http://localhost:2003/{attack_url}/{i2.replace('./','')}?{par}={payload}"      
+                        attack_url = path.replace(original_path,"")  
+                        url = f"http://localhost:2003/{attack_url}/{i2.replace('./','')}?{par}={payload}"
+                        
+                              
                         r = requests.get(url)
                         if payload in r.text and url not in found_XSS_open_server:
                             print(colors.color.orange(f"XSS found {url}"))
@@ -250,20 +256,10 @@ class server():
                     server.scan_files_in_folder(f"{path}/{i}",original_path)
             except:
                 pass
-            
-            for i in folders:
-                try:
-                    if (os.path.isdir(f"{path}/{i}")):
-                        server.scan_files_in_folder(f"{path}/{i}",original_path)
-                except:
-                    pass
-                
-        for i in folders:
-            if (os.path.isdir(f"{path}/{i}")):
-                server.scan_files_in_folder(f"{path}/{i}",original_path)
+
         
     def GET_parameters(file):
-        file = open(file,"r").read()
+        
         regex = "\$_GET\[.*\]"
         black_list = findall(regex, file)
         parameters = []
@@ -279,9 +275,9 @@ class server():
         return parameters
         
 
-    
 
     def open_server(path):  
+        
         try:
             subprocess.run(['php','-S','localhost:2003','-t',path],capture_output=True) 
         except:
@@ -312,7 +308,7 @@ class server():
                 
                 for payload in payloads:
                     url = f"http://localhost:2003/{path}?{par}={payload}"
-                    print(url)
+                    
                     r = requests.get(url)
                     if payload in r.text:
                         print(colors.color.orange(f"XSS found {url}"))

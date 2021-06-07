@@ -14,12 +14,18 @@ the script can find
 2. simple report 
 
 # usage:
-    python code.py <file name> >>> this will scan one file
+    python code.py -p <file name> >>> this will scan one file
     python code.py >>> this will scan full folder (.)
-    python code.py <path> >>> scan full folder 
+    python code.py -p <path> >>> scan full folder 
+
+    #for open php server
+    python code.py -p <path> --server
 
 # output
 <img src=img/run.jpg >
+
+
+
 
 
 
