@@ -22,7 +22,10 @@ the script can find
     python code.py -p <path> --server
 
 # output
-<img src=img/run.jpg >
+<img src=img/banner.PNG >
+
+<img src=./img/recap.PNG>
+<img src=img/php_server.PNG >
 
 
 
@@ -31,6 +34,6 @@ the script can find
 
 
 
-twitter: kira_321k
+## twitter: kira_321k
 
-insta: at9w
+## insta: at9w
