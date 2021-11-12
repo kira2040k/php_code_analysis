@@ -5,7 +5,8 @@ import os
 import colors
 
 
-print(f"""{colors.color.purple('')}
+print(
+    f"""{colors.color.purple('')}
 
 
            __                             __                           __           _     
@@ -20,7 +21,8 @@ print(f"""{colors.color.purple('')}
 
 """
 )
-print(f"""
+print(
+    f"""
 {colors.color.purple('[+]------------------------------------------[+]')}
 
 twitter:kira_321k
@@ -28,18 +30,20 @@ insta:at9w
 
 [+]-----------------------------------[+]
 
-""")
+"""
+)
 colors.color.reset()
+
+
 def scan_files_in_folder(path):
-    
-    
+
     folders = listdir(path)
-    
+
     for i2 in folders:
         try:
-            if('.php' in i2):        
+            if ".php" in i2:
 
-                file = open(f"{path}/{i2}","r",encoding="utf8",errors='ignore')
+                file = open(f"{path}/{i2}", "r", encoding="utf8", errors="ignore")
                 file = file.read()
                 line_number = 0
                 print(f"{path}/{i2}")
@@ -52,16 +56,17 @@ def scan_files_in_folder(path):
             pass
     for i in folders:
         try:
-            if (os.path.isdir(f"{path}/{i}")):
+            if os.path.isdir(f"{path}/{i}"):
                 scan_files_in_folder(f"{path}/{i}")
         except:
             pass
     return folders
-    
-if(len(argv) == 2):
+
+
+if len(argv) == 2:
     try:
-        if(".php" in argv[1]):
-            file = open(f"{argv[1]}","r",encoding="utf8",errors='ignore')
+        if ".php" in argv[1]:
+            file = open(f"{argv[1]}", "r", encoding="utf8", errors="ignore")
             file = file.read()
             line_number = 0
             CA.info.GET_parameters(file)
@@ -77,7 +82,7 @@ if(len(argv) == 2):
         pass
 else:
     try:
-        folders = scan_files_in_folder('.')
+        folders = scan_files_in_folder(".")
         CA.info.finish()
     except:
         pass
