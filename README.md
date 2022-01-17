@@ -32,4 +32,3 @@ the script can find
 
 ## twitter: kira_321k
 
-## insta: at9w
